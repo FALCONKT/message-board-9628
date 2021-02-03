@@ -13,6 +13,11 @@
 
         
         <div class="container">
+
+            <!--Error文言共通化部　読み込み-->
+            @include('commons.error_messages')
+
+
             @yield('content')
         </div>
         

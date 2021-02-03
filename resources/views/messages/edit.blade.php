@@ -3,6 +3,9 @@
 @section('content')
 
         <!-- ここにページ毎のコンテンツを書く -->
+        
+        <!--Error文言は　共通化-->
+
         <h1>id: {{ $message->id }} のメッセージ編集ページ</h1>
         
         <div class="row">

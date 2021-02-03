@@ -52,6 +52,15 @@ class MessagesController extends Controller
     public function store(Request $request)
     {
         
+        // requestのcontentに対して　validation
+        // 必須　且つ　191文字　と指定している
+        $this->validate($request, [
+            'content' => 'required|max:191',
+        ]);
+        // 何も入れない　且つ　191　より文字数が大きいと遷移しない
+        // bladeに　遷移しなかった旨を　返す
+        
+        
         $message = new Message;
         $message->content = $request->content;
         $message->save();
@@ -103,6 +112,12 @@ class MessagesController extends Controller
     // putまたはpatchでmessages/idにAccessされた場合の「更新処理」
     public function update(Request $request, $id)
     {
+        // 更新する際もvalidate
+        $this->validate($request,[
+            'content' => 'required|max:191',
+        ]);
+        
+        
         $message = Message::find($id);
         $message->content = $request->content;
         $message->save();
