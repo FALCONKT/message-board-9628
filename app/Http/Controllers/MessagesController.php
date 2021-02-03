@@ -55,6 +55,10 @@ class MessagesController extends Controller
         // requestのcontentに対して　validation
         // 必須　且つ　191文字　と指定している
         $this->validate($request, [
+
+            // 追加Columen用
+            'title' => 'required|max:191',
+
             'content' => 'required|max:191',
         ]);
         // 何も入れない　且つ　191　より文字数が大きいと遷移しない
@@ -62,6 +66,10 @@ class MessagesController extends Controller
         
         
         $message = new Message;
+
+        // 追加Columen用
+        $message->title = $request->title;
+
         $message->content = $request->content;
         $message->save();
         // request化　更に　内容　保存
@@ -112,13 +120,20 @@ class MessagesController extends Controller
     // putまたはpatchでmessages/idにAccessされた場合の「更新処理」
     public function update(Request $request, $id)
     {
-        // 更新する際もvalidate
-        $this->validate($request,[
+            // 更新する際もvalidate
+            $this->validate($request,[
+
+            // 追加Columen用
+            'title' => 'required|max:191', 
+            
             'content' => 'required|max:191',
         ]);
         
         
         $message = Message::find($id);
+
+        // 追加Columen用
+        $message->title = $request->title;
         $message->content = $request->content;
         $message->save();
 
